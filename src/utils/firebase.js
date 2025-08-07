@@ -1,5 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+// utils/firebase.js
+
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, getDocs, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHyRKFOAiPZdQ4UJBGI2Dkz5w_KpI5cjc",
@@ -14,15 +16,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function saveToFirebase(name1, name2) {
-  await addDoc(collection(db, 'submissions'), {
-    yourName: name1,
-    crushName: name2,
-    timestamp: Date.now()
+export const saveToFirebase = async (yourName, crushName) => {
+  await addDoc(collection(db, "flames"), {
+    yourName,
+    crushName,
+    timestamp: serverTimestamp()
   });
-}
+};
 
-export async function getSubmissions() {
-  const snapshot = await getDocs(collection(db, 'submissions'));
-  return snapshot.docs.map(doc => doc.data());
-}
+export const getSubmissions = async () => {
+  const snapshot = await getDocs(collection(db, "flames"));
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
+
+export const deleteSubmission = async (id) => {
+  await deleteDoc(doc(db, "flames", id));
+};

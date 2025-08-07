@@ -122,7 +122,7 @@ export default function Home() {
                         {getRandomMeme()}
                     </p>
                     <p className="mt-3 text-sm text-gray-400">– Powered by Kaadhal Memes Dept. 😎</p>
-
+                    <p>Refresh pannu maamae vera dialogue varum....</p>
                     <div className="mt-4 flex justify-center space-x-4 text-2xl">
                         <span>😂</span>
                         <span>❤️</span>
