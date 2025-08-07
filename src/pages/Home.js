@@ -44,9 +44,8 @@ export default function Home() {
     const handleSubmit = async () => {
         const res = flamesLogic(name1, name2);
         setResult(res);
-        await saveToFirebase(name1, name2);
+        await saveToFirebase(name1, name2, res); // ✅ FIXED HERE
     };
-
 
     const tamilMemes = [
         "Avaluku naan love panren nu solla bayam illa... avaluku naan venam nu solla bayama iruku da! 🥲",
@@ -76,12 +75,8 @@ export default function Home() {
                 <img src={image1} alt="valentine" className="w-full md:w-1/2" />
 
                 <div className="text-center md:text-left">
-                    <h1 className="text-4xl md:text-5xl font-bold text-purple-800">
-                        Is Today
-                    </h1>
-                    <h1 className="text-4xl md:text-5xl font-bold text-purple-800">
-                        Valentine’s Day?
-                    </h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-purple-800">Is Today</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-purple-800">Valentine’s Day?</h1>
                     <p className="mt-4 text-gray-600 text-md md:text-lg">
                         Unkooda 100 Varusham vaazhanum daaaa!!!!
                     </p>
@@ -103,7 +98,7 @@ export default function Home() {
                             onClick={handleSubmit}
                             className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
                         >
-                           Avalukku nee yaaru???
+                            Avalukku nee yaaru???
                         </button>
 
                         {result && (
@@ -115,12 +110,11 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
             <footer className="bg-gray-900 text-white py-8 mt-10 shadow-inner">
                 <div className="max-w-4xl mx-auto px-4 text-center">
                     <h2 className="text-xl md:text-2xl font-bold text-pink-400 mb-4">💘 Tamil Kadhal Comedy 💘</h2>
-                    <p className="text-lg md:text-xl font-semibold text-gray-200">
-                        {getRandomMeme()}
-                    </p>
+                    <p className="text-lg md:text-xl font-semibold text-gray-200">{getRandomMeme()}</p>
                     <p className="mt-3 text-sm text-gray-400">– Powered by Kaadhal Memes Dept. 😎</p>
                     <p>Refresh pannu maamae vera dialogue varum....</p>
                     <div className="mt-4 flex justify-center space-x-4 text-2xl">
@@ -132,7 +126,6 @@ export default function Home() {
                     </div>
                 </div>
             </footer>
-
         </div>
     );
 }

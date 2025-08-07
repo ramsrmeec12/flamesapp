@@ -27,15 +27,18 @@ export default function Admin() {
             <tr>
               <th className="px-6 py-3 text-left">Your Name</th>
               <th className="px-6 py-3 text-left">Crush Name</th>
+              <th className="px-6 py-3 text-left">Result</th>
               <th className="px-6 py-3 text-left">Time</th>
               <th className="px-6 py-3 text-left">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {submissions.map((item, index) => (
               <tr key={index} className="border-b">
                 <td className="px-6 py-4">{item.yourName}</td>
                 <td className="px-6 py-4">{item.crushName}</td>
+                <td className="px-6 py-4 font-semibold text-purple-700">{item.result || '---'}</td>
                 <td className="px-6 py-4">
                   {item.timestamp
                     ? new Date(item.timestamp.seconds * 1000).toLocaleString()

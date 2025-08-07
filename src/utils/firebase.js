@@ -1,7 +1,17 @@
 // utils/firebase.js
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, serverTimestamp, deleteDoc, doc, orderBy, query } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp,
+  deleteDoc,
+  doc,
+  orderBy,
+  query,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHyRKFOAiPZdQ4UJBGI2Dkz5w_KpI5cjc",
@@ -16,14 +26,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const saveToFirebase = async (yourName, crushName) => {
+// ✅ Accept 'result' as a parameter
+export const saveToFirebase = async (yourName, crushName, result) => {
   await addDoc(collection(db, "flames"), {
     yourName,
     crushName,
+    result,
     timestamp: serverTimestamp()
   });
 };
-
 
 export const getSubmissions = async () => {
   const submissionsRef = collection(db, "flames");
